@@ -29,8 +29,14 @@ if __name__ == "__main__":
         file_name = sys.argv[1]
         starting_word = sys.argv[2]
         max_words = int(sys.argv[3])
+    except:
+        print("Please provide all arguments correctly")
+    else:
         try:
-            words, letters = ts.read_file("shakespeare.txt")
+            words, letters = ts.read_file(file_name)
+        except:
+            print("this file does not exist!")
+        else:
             ordered_words  = Convert(ts.count_frequencies(words))[0]
             
             word_flw = ts.get_array_with_following_words(words)
@@ -50,10 +56,9 @@ if __name__ == "__main__":
                     print(f"word {new_word} does not exist!")
                     Stop = False
                 i+=1
-            write_to_file(" ".join(word_sequence), file_name)
-        except:
-            print("this file does not exist!")
-    except:
-        print("Please provide all arguments correctly")
+            write_to_file(" ".join(word_sequence), "_".join(("new",file_name.split(".")[0])))
+            print(file_name.split(".")[0])
+            
+
 
         
