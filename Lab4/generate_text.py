@@ -10,8 +10,6 @@ import text_stats as ts
 from random import choices
 import time
 
-
-
 def write_to_file(sentence, file_name):
     # Writing to file 
     with open(file_name, "w") as file1: 
@@ -28,11 +26,11 @@ def Convert(tup):
 
 
 if __name__ == "__main__":
+    start = time.time()
     try:
         file_name = sys.argv[1]
         starting_word = sys.argv[2]
         max_words = int(sys.argv[3])
-        start = time.time()
     except:
         print("Please provide all arguments correctly")
     else:
@@ -67,10 +65,10 @@ if __name__ == "__main__":
                     print(f"word {new_word} does not exist!")
                     Stop = False
                 i+=1
-            write_to_file(" ".join(word_sequence), "_".join(("new",file_name.split(".")[0])))
+            write_to_file(" ".join(word_sequence), "_".join(("new",file_name)))
             end = time.time()
-            print((end - start)/max_words)
-            
+            print((end-start)/max_words)
+
 
 
         
