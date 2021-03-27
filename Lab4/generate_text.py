@@ -8,7 +8,6 @@
 import sys
 import text_stats as ts
 from random import choices
-import time
 
 def write_to_file(sentence, file_name):
     # Writing to file 
@@ -26,7 +25,6 @@ def Convert(tup):
 
 
 if __name__ == "__main__":
-    start = time.time()
     try:
         file_name = sys.argv[1]
         starting_word = sys.argv[2]
@@ -40,14 +38,13 @@ if __name__ == "__main__":
             print("this file does not exist!")
         else:
             ordered_words  = Convert(ts.count_frequencies(words))[0]
-            
             word_flw = ts.get_array_with_following_words(words)
             word_sequence = [starting_word]
             Stop = True
-            i = 0
+            word_count = 0
             new_word = starting_word
             word_dictionary = {}
-            while (i<max_words) & Stop:
+            while (word_count<max_words) & Stop:
                 if new_word in ordered_words:
                     if new_word in word_dictionary:
                         new_word = choices(word_dictionary[new_word][0],word_dictionary[new_word][1],k=1)[0]
@@ -64,10 +61,8 @@ if __name__ == "__main__":
                 else:
                     print(f"word {new_word} does not exist!")
                     Stop = False
-                i+=1
+                word_count+=1
             write_to_file(" ".join(word_sequence), "_".join(("new",file_name)))
-            end = time.time()
-            print((end-start)/max_words)
 
 
 
